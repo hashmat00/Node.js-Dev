@@ -1,35 +1,19 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/blog_demo_2");
 
-
-//POST - titele - content
-var postSchema = new mongoose.Schema({
-    title: String,
-    content: String
-});
-var Post = mongoose.model("Post", postSchema);
+var Post = require("./models/post");
+var User = require("./models/user");
 
 
 
-//USER - email,  name
-var userSchema = new mongoose.Schema({
-    email: String,
-    name: String,
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Post"
-        }
-        ]
-});
-var User = mongoose.model("User", userSchema);
 
 
 
+///CREATE POST AND ADD TO USER BY FINDING USER BY EMAIL
 
 Post.create({
-    title: "how to cook the best bureger part 4sss",
-    content: "hasdfjdshf--fsdfdsdfsdfds"
+    title: "Model folder with module export",
+    content: "454545454454543543534543"
     
 }, function(err, post){
     User.findOne({name: "Hashmat Mh"}, function(err, foundUser){
@@ -49,7 +33,31 @@ Post.create({
 });
 
 
+//FIND USER
+//FIND ALL POST FOR THAT USER
 
+// User.findOne({email: "hashmat00@aol.com"}).populate("posts").exec(function(err, user){
+//   if(err){
+//       console.log(err);
+//   } else{
+//       console.log(user);
+//   }
+// });
+
+
+
+// User.findOne({email: "bob@gmail.com"}).populate("posts").exec(function(err, user){
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log(user);
+//     }
+// });
+
+
+
+
+// //create user
 // User.create({
 //     email: "hashmat00@aol.com",
 //     name: "Hashmat Mh"
